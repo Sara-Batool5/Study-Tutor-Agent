@@ -1,5 +1,7 @@
 import streamlit as st
 
+from crew import run_tutor
+
 
 # ---------------------------------------------------------
 # PAGE CONFIG
@@ -14,7 +16,7 @@ st.set_page_config(
 
 # ---------------------------------------------------------
 # CUSTOM CSS
-# Theme-safe: works with Light and Dark Streamlit themes
+# Theme-safe: works with Light and Dark themes
 # ---------------------------------------------------------
 
 st.markdown(
@@ -77,7 +79,7 @@ st.markdown(
     }
 
 
-    /* Remove unnecessary decoration */
+    /* Header */
     header[data-testid="stHeader"] {
         background: transparent;
     }
@@ -145,6 +147,7 @@ question = st.text_area(
 
 col1, col2 = st.columns(2)
 
+
 with col1:
 
     level = st.selectbox(
@@ -171,16 +174,18 @@ with col2:
 
 
 # ---------------------------------------------------------
-# BUTTON
+# ASK TUTOR
 # ---------------------------------------------------------
 
 st.markdown("")
+
 
 if st.button(
     "✨ Ask Study Tutor",
     type="primary",
 ):
 
+    # Check question
     if not question.strip():
 
         st.warning(
@@ -189,10 +194,28 @@ if st.button(
 
     else:
 
-        st.info(
-            "Your question has been received."
-        )
+        # Run CrewAI agent
+        with st.spinner(
+            "🧠 Study Tutor is thinking..."
+        ):
 
-        st.write("**Question:**", question)
-        st.write("**Level:**", level)
-        st.write("**Learning Mode:**", mode)
+            try:
+
+                response = run_tutor(
+                    question=question,
+                    level=level,
+                    mode=mode,
+                )
+
+                # Display response
+                st.markdown("### ✨ Tutor Response")
+
+                st.markdown(response)
+
+            except Exception as e:
+
+                st.error(
+                    "The Study Tutor could not process your request."
+                )
+
+                st.exception(e)
