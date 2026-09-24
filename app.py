@@ -1,9 +1,9 @@
 import streamlit as st
 
 
-# =========================================================
+# ---------------------------------------------------------
 # PAGE CONFIG
-# =========================================================
+# ---------------------------------------------------------
 
 st.set_page_config(
     page_title="Study Tutor AI",
@@ -12,236 +12,93 @@ st.set_page_config(
 )
 
 
-# =========================================================
+# ---------------------------------------------------------
 # CUSTOM CSS
-# =========================================================
+# Theme-safe: works with Light and Dark Streamlit themes
+# ---------------------------------------------------------
 
 st.markdown(
     """
     <style>
 
-    /* =====================================================
-       GLOBAL
-    ===================================================== */
-
-    .stApp {
-        background:
-            radial-gradient(
-                circle at 10% 10%,
-                rgba(0, 174, 255, 0.12),
-                transparent 30%
-            ),
-            radial-gradient(
-                circle at 90% 20%,
-                rgba(123, 92, 255, 0.12),
-                transparent 30%
-            ),
-            #070b14;
-
-        color: #f5f7ff;
-    }
-
-
+    /* Main page spacing */
     .block-container {
-        max-width: 1100px;
+        max-width: 1000px;
         padding-top: 3rem;
         padding-bottom: 4rem;
     }
 
 
-    /* =====================================================
-       HERO
-    ===================================================== */
-
-    .title {
-        font-size: 48px;
+    /* Hero */
+    .hero-title {
+        font-size: 46px;
         font-weight: 800;
-        line-height: 1.1;
-
-        background:
-            linear-gradient(
-                90deg,
-                #38d9ff,
-                #7b61ff,
-                #c66cff
-            );
-
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+        line-height: 1.15;
+        margin-bottom: 8px;
     }
 
-
-    .subtitle {
-        color: #a9b9d6;
-        font-size: 18px;
-        margin-top: 12px;
+    .hero-subtitle {
+        font-size: 19px;
+        opacity: 0.75;
         margin-bottom: 35px;
     }
 
 
-    /* =====================================================
-       REMOVE EMPTY TOP ELEMENTS
-    ===================================================== */
+    /* Text area */
+    div[data-testid="stTextArea"] textarea {
+        color: inherit !important;
+        -webkit-text-fill-color: currentColor !important;
+        background-color: transparent !important;
+        caret-color: currentColor !important;
+    }
 
-    div[data-testid="stElementContainer"]:empty {
-        display: none !important;
+    div[data-testid="stTextArea"] textarea::placeholder {
+        opacity: 0.6 !important;
+        -webkit-text-fill-color: currentColor !important;
     }
 
 
-    /* =====================================================
-       TEXT AREA
-    ===================================================== */
+    /* Select boxes */
+    div[data-testid="stSelectbox"] div[data-baseweb="select"] {
+        color: inherit !important;
+    }
 
-    /* Outer text area */
-
-    div[data-baseweb="textarea"] {
-        background-color: #ffffff !important;
-
-        border: 1px solid
-            rgba(0, 200, 255, 0.35) !important;
-
-        border-radius: 14px !important;
+    div[data-testid="stSelectbox"] div[data-baseweb="select"] * {
+        color: inherit !important;
     }
 
 
-    /* Inner textarea */
-
-    div[data-baseweb="textarea"] textarea {
-        background-color: #ffffff !important;
-
-        color: #111111 !important;
-
-        -webkit-text-fill-color: #111111 !important;
-
-        caret-color: #008cff !important;
-
-        font-size: 15px !important;
-    }
-
-
-    /* Placeholder */
-
-    div[data-baseweb="textarea"]
-    textarea::placeholder {
-
-        color: #777777 !important;
-
-        -webkit-text-fill-color: #777777 !important;
-
-        opacity: 1 !important;
-    }
-
-
-    /* =====================================================
-       TEXT AREA LABEL
-    ===================================================== */
-
-    div[data-testid="stTextArea"] label {
-
-        color: #111111 !important;
-
-        font-weight: 600 !important;
-    }
-
-
-    /* =====================================================
-       SELECT BOX
-    ===================================================== */
-
-    div[data-baseweb="select"] > div {
-
-        background-color: #ffffff !important;
-
-        color: #111111 !important;
-
-        border-color:
-            rgba(0, 200, 255, 0.30) !important;
-
-        border-radius: 10px !important;
-    }
-
-
-    div[data-baseweb="select"] input {
-
-        color: #111111 !important;
-    }
-
-
-    div[data-baseweb="select"] span {
-
-        color: #111111 !important;
-    }
-
-
-    /* =====================================================
-       BUTTON
-    ===================================================== */
-
-    .stButton > button {
-
+    /* Buttons */
+    div[data-testid="stButton"] button {
         width: 100%;
-
-        border-radius: 14px;
-
-        border: 1px solid
-            rgba(0, 210, 255, 0.45);
-
-        background:
-            linear-gradient(
-                90deg,
-                #008cff,
-                #6d4cff
-            );
-
-        color: white;
-
-        font-weight: 700;
-
-        padding: 13px 20px;
-
-        box-shadow:
-            0 0 20px
-            rgba(0, 157, 255, 0.20);
+        min-height: 48px;
+        border-radius: 10px;
+        font-weight: 600;
     }
 
 
-    .stButton > button:hover {
-
-        box-shadow:
-            0 0 30px
-            rgba(0, 174, 255, 0.40);
-
-        transform: translateY(-2px);
+    /* Remove unnecessary decoration */
+    header[data-testid="stHeader"] {
+        background: transparent;
     }
 
 
-    /* =====================================================
-       HEADINGS
-    ===================================================== */
-
-    h3 {
-        color: #ffffff !important;
-    }
-
-
-    /* =====================================================
-       MOBILE
-    ===================================================== */
-
+    /* Mobile */
     @media (max-width: 768px) {
 
-        .title {
+        .block-container {
+            padding-top: 2rem;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        .hero-title {
             font-size: 36px;
         }
 
-        .subtitle {
-            font-size: 15px;
+        .hero-subtitle {
+            font-size: 16px;
         }
-
-        .block-container {
-            padding: 1.2rem;
-        }
-
     }
 
     </style>
@@ -250,18 +107,18 @@ st.markdown(
 )
 
 
-# =========================================================
+# ---------------------------------------------------------
 # HERO
-# =========================================================
+# ---------------------------------------------------------
 
 st.markdown(
     """
-    <div class="title">
+    <div class="hero-title">
         Learn Smarter.<br>
         Think Deeper.
     </div>
 
-    <div class="subtitle">
+    <div class="hero-subtitle">
         Your AI Study Tutor
     </div>
     """,
@@ -269,50 +126,55 @@ st.markdown(
 )
 
 
-# =========================================================
-# MAIN INPUT
-# =========================================================
+# ---------------------------------------------------------
+# STUDY INPUT
+# ---------------------------------------------------------
 
 st.markdown("### Ask your Study Tutor")
 
-
 question = st.text_area(
     "What do you want to learn?",
-    placeholder=(
-        "Example: Explain PCR to me as a beginner."
-    ),
+    placeholder="Example: Explain PCR to me as a beginner.",
     height=150,
 )
 
 
-# =========================================================
+# ---------------------------------------------------------
 # SETTINGS
-# =========================================================
+# ---------------------------------------------------------
 
-level = st.selectbox(
-    "Your Level",
-    [
-        "Beginner",
-        "Intermediate",
-        "Advanced",
-    ],
-)
+col1, col2 = st.columns(2)
 
+with col1:
 
-mode = st.selectbox(
-    "Learning Mode",
-    [
-        "Explain",
-        "Ask a Question",
-        "Quiz",
-        "Study Plan",
-    ],
-)
+    level = st.selectbox(
+        "Your Level",
+        [
+            "Beginner",
+            "Intermediate",
+            "Advanced",
+        ],
+    )
 
 
-# =========================================================
-# TEST BUTTON
-# =========================================================
+with col2:
+
+    mode = st.selectbox(
+        "Learning Mode",
+        [
+            "Explain",
+            "Ask a Question",
+            "Quiz",
+            "Study Plan",
+        ],
+    )
+
+
+# ---------------------------------------------------------
+# BUTTON
+# ---------------------------------------------------------
+
+st.markdown("")
 
 if st.button(
     "✨ Ask Study Tutor",
@@ -327,6 +189,10 @@ if st.button(
 
     else:
 
-        st.success(
-            f"Question received: {question}"
+        st.info(
+            "Your question has been received."
         )
+
+        st.write("**Question:**", question)
+        st.write("**Level:**", level)
+        st.write("**Learning Mode:**", mode)
