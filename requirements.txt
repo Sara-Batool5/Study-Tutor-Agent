@@ -2,4 +2,5 @@ streamlit
 crewai
 crewai-tools
 groq
+litellm
 sentence-transformers
