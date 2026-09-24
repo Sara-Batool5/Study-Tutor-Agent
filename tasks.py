@@ -1,12 +1,8 @@
 from crewai import Task
 
 
-def create_tutor_task(
-    agent,
-    question,
-    level,
-    mode
-):
+def create_tutor_task(agent, question, level, mode):
+
     mode_instructions = {
         "Explain": """
 Teach the requested topic clearly and progressively.
@@ -15,7 +11,7 @@ Teach the requested topic clearly and progressively.
 - Break complex ideas into smaller sections.
 - Adapt the explanation to the student's level.
 - Use examples or analogies when helpful.
-- Include important practical applications when relevant.
+- Include practical applications when relevant.
 - Focus on understanding rather than memorization.
 """,
 
@@ -26,11 +22,11 @@ Answer the student's question directly and accurately.
 - Explain the reasoning behind the answer.
 - Add relevant details or examples when useful.
 - Adapt the depth to the student's level.
-- Do not unnecessarily turn the response into a quiz or study plan.
+- Do not turn the response into a quiz or study plan.
 """,
 
-       "Quiz": """
-Create a quiz for the student based on the requested topic.
+        "Quiz": """
+Create a quiz based on the student's requested topic.
 
 - Generate 5 quiz questions.
 - Adapt the difficulty to the student's level.
@@ -40,8 +36,8 @@ Create a quiz for the student based on the requested topic.
 - Give a short explanation for each correct answer.
 - Cover different concepts from the requested topic.
 - Do not provide a long lesson before the quiz.
-- Present the questions clearly and separately.
-"""
+- Present each question clearly and separately.
+""",
 
         "Study Plan": """
 Create a practical study plan for the requested topic.
@@ -49,11 +45,11 @@ Create a practical study plan for the requested topic.
 - Break the topic into logical learning sessions.
 - Organize the material in a sensible order.
 - Include what the student should learn in each session.
-- Suggest practice or revision activities.
+- Suggest practice and revision activities.
 - Adapt the plan to the student's level.
 - If the student provides a duration, follow it.
 - If the student provides available study time, consider it.
-- Use the Study Planner tool when it is genuinely useful.
+- Use the Study Planner tool when genuinely useful.
 """
     }
 
@@ -82,21 +78,22 @@ Follow these learning-mode instructions:
 General tutor instructions:
 
 1. Be clear, accurate, patient, and encouraging.
-2. Adapt the explanation to the student's level.
-3. Use simple language when the student is a beginner.
-4. Use more technical terminology when appropriate for advanced students.
-5. Use examples, analogies, or practical applications when useful.
+2. Adapt the response to the student's level.
+3. Use simple language for beginners.
+4. Use appropriate technical terminology for advanced students.
+5. Use examples or analogies when useful.
 6. Use available tools only when genuinely necessary.
 7. Do not invent facts.
-8. If the student's request is unclear, state your assumption.
-9. Encourage active learning and understanding.
-10. Keep the response well structured and easy to read.
+8. If the request is unclear, state your assumption.
+9. Encourage understanding rather than memorization.
+10. Keep the response well structured and readable.
 
 For Explain and Ask a Question modes:
 End the response with a short "Key Takeaway".
 
 For Quiz mode:
-Do not provide the answer to a new question before the student attempts it.
+Generate the quiz questions and provide the correct answer
+and a short explanation after each question.
 """,
 
         expected_output=(
