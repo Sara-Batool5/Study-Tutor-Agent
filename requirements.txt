@@ -1,7 +1,6 @@
-streamlit==1.50.0
+streamlit
 crewai==1.14.6
 crewai-tools==1.14.6
 groq
 litellm
 sentence-transformers
-chromadb==0.6.3
