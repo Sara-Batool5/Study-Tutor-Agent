@@ -29,19 +29,19 @@ Answer the student's question directly and accurately.
 - Do not unnecessarily turn the response into a quiz or study plan.
 """,
 
-        "Quiz": """
-Act as an interactive quiz tutor.
+       "Quiz": """
+Create a quiz for the student based on the requested topic.
 
-- Create a quiz based on the student's requested topic.
+- Generate 5 quiz questions.
 - Adapt the difficulty to the student's level.
-- Ask one question at a time.
-- Do NOT reveal the answer immediately.
-- Ask the student to provide their answer.
-- When the student provides an answer, evaluate it.
-- Explain why the answer is correct or incorrect.
-- Then provide the next question.
-- Keep track of the student's progress when possible.
-""",
+- Use multiple-choice questions.
+- Give four options for each question: A, B, C, and D.
+- Clearly identify the correct answer after each question.
+- Give a short explanation for each correct answer.
+- Cover different concepts from the requested topic.
+- Do not provide a long lesson before the quiz.
+- Present the questions clearly and separately.
+"""
 
         "Study Plan": """
 Create a practical study plan for the requested topic.
