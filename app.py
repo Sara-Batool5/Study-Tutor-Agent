@@ -1,5 +1,7 @@
 import streamlit as st
 
+st.write("VERSION TEST: STUDY TUTOR 2026")
+
 from crew import run_tutor
 
 
